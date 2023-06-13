@@ -48,16 +48,8 @@ class pathao_WebHook(http.Controller):
             _logger.error("Error!!!  {}".format(e))
             return self.error_response_builder(500, "order_update_error2", str(e))
         try:
-            if data['order_status_slug'] == 'Picked':
-                order.write({
-                    "pickup": data['updated_at']
-                })
-            if data['order_status_slug'] == 'Delivered':
-                order.write({
-                    "delivery": data['updated_at']
-                })
             order.write({
-                "pathao_state": data['order_status_slug'],
+                "pathao_state": data['order_status'],
                 "pathao_last_update_time": data['updated_at']
 
             })
